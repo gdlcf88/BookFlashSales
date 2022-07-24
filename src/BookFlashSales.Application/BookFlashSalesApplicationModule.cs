@@ -1,4 +1,9 @@
-﻿using Volo.Abp.Account;
+﻿using EasyAbp.EShop;
+using EasyAbp.EShop.Orders.Plugins.FlashSales;
+using EasyAbp.EShop.Plugins.FlashSales;
+using EasyAbp.EShop.Products.Plugins.FlashSales;
+using EasyAbp.PaymentService;
+using Volo.Abp.Account;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -17,8 +22,13 @@ namespace BookFlashSales;
     typeof(AbpPermissionManagementApplicationModule),
     typeof(AbpTenantManagementApplicationModule),
     typeof(AbpFeatureManagementApplicationModule),
-    typeof(AbpSettingManagementApplicationModule)
-    )]
+    typeof(AbpSettingManagementApplicationModule),
+    typeof(EShopApplicationModule),
+    typeof(EShopPluginsFlashSalesApplicationModule),
+    typeof(EShopOrdersPluginsFlashSalesApplicationModule),
+    typeof(EShopProductsPluginsFlashSalesApplicationModule),
+    typeof(PaymentServiceApplicationModule)
+)]
 public class BookFlashSalesApplicationModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)

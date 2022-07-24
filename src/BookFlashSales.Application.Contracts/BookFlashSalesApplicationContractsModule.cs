@@ -1,4 +1,7 @@
-﻿using Volo.Abp.Account;
+﻿using EasyAbp.EShop;
+using EasyAbp.EShop.Plugins.FlashSales;
+using EasyAbp.PaymentService;
+using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
 using Volo.Abp.Modularity;
@@ -17,7 +20,10 @@ namespace BookFlashSales;
     typeof(AbpPermissionManagementApplicationContractsModule),
     typeof(AbpSettingManagementApplicationContractsModule),
     typeof(AbpTenantManagementApplicationContractsModule),
-    typeof(AbpObjectExtendingModule)
+    typeof(AbpObjectExtendingModule),
+    typeof(EShopApplicationContractsModule),
+    typeof(EShopPluginsFlashSalesApplicationContractsModule),
+    typeof(PaymentServiceApplicationContractsModule)
 )]
 public class BookFlashSalesApplicationContractsModule : AbpModule
 {

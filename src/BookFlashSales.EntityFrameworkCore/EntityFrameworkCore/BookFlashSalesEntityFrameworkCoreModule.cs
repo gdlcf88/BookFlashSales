@@ -1,4 +1,7 @@
 ﻿using System;
+using EasyAbp.EShop.EntityFrameworkCore;
+using EasyAbp.EShop.Plugins.FlashSales.EntityFrameworkCore;
+using EasyAbp.PaymentService.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
@@ -24,8 +27,11 @@ namespace BookFlashSales.EntityFrameworkCore;
     typeof(AbpBackgroundJobsEntityFrameworkCoreModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(AbpTenantManagementEntityFrameworkCoreModule),
-    typeof(AbpFeatureManagementEntityFrameworkCoreModule)
-    )]
+    typeof(AbpFeatureManagementEntityFrameworkCoreModule),
+    typeof(EShopEntityFrameworkCoreModule),
+    typeof(EShopPluginsFlashSalesEntityFrameworkCoreModule),
+    typeof(PaymentServiceEntityFrameworkCoreModule)
+)]
 public class BookFlashSalesEntityFrameworkCoreModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

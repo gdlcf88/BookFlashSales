@@ -1,6 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using BookFlashSales.MultiTenancy;
+using EasyAbp.EShop;
+using EasyAbp.EShop.Plugins.FlashSales;
+using EasyAbp.PaymentService;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Emailing;
@@ -27,7 +30,10 @@ namespace BookFlashSales;
     typeof(AbpPermissionManagementDomainIdentityServerModule),
     typeof(AbpSettingManagementDomainModule),
     typeof(AbpTenantManagementDomainModule),
-    typeof(AbpEmailingModule)
+    typeof(AbpEmailingModule),
+    typeof(EShopDomainModule),
+    typeof(EShopPluginsFlashSalesDomainModule),
+    typeof(PaymentServiceDomainModule)
 )]
 public class BookFlashSalesDomainModule : AbpModule
 {

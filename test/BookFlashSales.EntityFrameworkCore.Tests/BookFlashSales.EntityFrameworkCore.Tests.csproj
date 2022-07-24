@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BookFlashSales.EntityFrameworkCore\BookFlashSales.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\BookFlashSales.TestBase\BookFlashSales.TestBase.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="5.3.1" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.Sqlite" Version="$(AbpVersion)" />
   </ItemGroup>
 
   <ItemGroup>

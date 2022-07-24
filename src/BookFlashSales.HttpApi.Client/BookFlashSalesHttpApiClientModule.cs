@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using EasyAbp.EShop;
+using EasyAbp.EShop.Plugins.FlashSales;
+using EasyAbp.PaymentService;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Account;
 using Volo.Abp.FeatureManagement;
 using Volo.Abp.Identity;
@@ -17,7 +20,10 @@ namespace BookFlashSales;
     typeof(AbpPermissionManagementHttpApiClientModule),
     typeof(AbpTenantManagementHttpApiClientModule),
     typeof(AbpFeatureManagementHttpApiClientModule),
-    typeof(AbpSettingManagementHttpApiClientModule)
+    typeof(AbpSettingManagementHttpApiClientModule),
+    typeof(EShopHttpApiClientModule),
+    typeof(EShopPluginsFlashSalesHttpApiClientModule),
+    typeof(PaymentServiceHttpApiClientModule)
 )]
 public class BookFlashSalesHttpApiClientModule : AbpModule
 {

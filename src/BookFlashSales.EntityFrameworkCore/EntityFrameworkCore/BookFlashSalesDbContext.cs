@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EasyAbp.EShop.EntityFrameworkCore;
+using EasyAbp.EShop.Plugins.FlashSales.EntityFrameworkCore;
+using EasyAbp.PaymentService.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -72,6 +75,9 @@ public class BookFlashSalesDbContext :
         builder.ConfigureIdentityServer();
         builder.ConfigureFeatureManagement();
         builder.ConfigureTenantManagement();
+        builder.ConfigureEShop();
+        builder.ConfigureEShopPluginsFlashSales();
+        builder.ConfigurePaymentService();
 
         /* Configure your own tables/entities inside here */
 

@@ -3,7 +3,7 @@
   <Import Project="..\..\common.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>BookFlashSales</RootNamespace>
   </PropertyGroup>
 
@@ -12,12 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="5.3.1" />
+    <PackageReference Include="EasyAbp.EShop.HttpApi.Client" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.HttpApi.Client" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.PaymentService.HttpApi.Client" Version="$(PaymentServiceVersion)" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.HttpApi.Client" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.HttpApi.Client" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.TenantManagement.HttpApi.Client" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.HttpApi.Client" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.HttpApi.Client" Version="$(AbpVersion)" />
   </ItemGroup>
 
   <ItemGroup>

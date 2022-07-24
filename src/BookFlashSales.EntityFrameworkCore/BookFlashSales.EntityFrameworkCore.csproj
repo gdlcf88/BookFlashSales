@@ -9,19 +9,22 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookFlashSales.Domain\BookFlashSales.Domain.csproj" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="5.3.1" />
+    <PackageReference Include="EasyAbp.EShop.EntityFrameworkCore" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.EntityFrameworkCore" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.PaymentService.EntityFrameworkCore" Version="$(PaymentServiceVersion)" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.IdentityServer.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.TenantManagement.EntityFrameworkCore" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.EntityFrameworkCore" Version="$(AbpVersion)" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.7">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>compile; contentFiles; build; buildMultitargeting; buildTransitive; analyzers; native</PrivateAssets>
     </PackageReference>

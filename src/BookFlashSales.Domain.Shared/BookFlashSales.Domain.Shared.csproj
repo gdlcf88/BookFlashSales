@@ -9,14 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.IdentityServer.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="5.3.1" />
+    <PackageReference Include="EasyAbp.EShop.Domain.Shared" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.Domain.Shared" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.PaymentService.Domain.Shared" Version="$(PaymentServiceVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.IdentityServer.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.BackgroundJobs.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.AuditLogging.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Domain.Shared" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Domain.Shared" Version="$(AbpVersion)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.5" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.7" />
   </ItemGroup>
 
 </Project>

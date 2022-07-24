@@ -1,4 +1,7 @@
 ﻿using BookFlashSales.Localization;
+using EasyAbp.EShop;
+using EasyAbp.EShop.Plugins.FlashSales;
+using EasyAbp.PaymentService;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.FeatureManagement;
@@ -23,8 +26,11 @@ namespace BookFlashSales;
     typeof(AbpIdentityServerDomainSharedModule),
     typeof(AbpPermissionManagementDomainSharedModule),
     typeof(AbpSettingManagementDomainSharedModule),
-    typeof(AbpTenantManagementDomainSharedModule)
-    )]
+    typeof(AbpTenantManagementDomainSharedModule),
+    typeof(EShopDomainSharedModule),
+    typeof(EShopPluginsFlashSalesDomainSharedModule),
+    typeof(PaymentServiceDomainSharedModule)
+)]
 public class BookFlashSalesDomainSharedModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

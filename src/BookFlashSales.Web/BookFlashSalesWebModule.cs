@@ -10,6 +10,9 @@ using BookFlashSales.EntityFrameworkCore;
 using BookFlashSales.Localization;
 using BookFlashSales.MultiTenancy;
 using BookFlashSales.Web.Menus;
+using EasyAbp.EShop.Plugins.FlashSales.Web;
+using EasyAbp.EShop.Web;
+using EasyAbp.PaymentService.Web;
 using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -53,8 +56,11 @@ namespace BookFlashSales.Web;
     typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
     typeof(AbpTenantManagementWebModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
-    )]
+    typeof(AbpSwashbuckleModule),
+    typeof(EShopWebModule),
+    typeof(EShopPluginsFlashSalesWebModule),
+    typeof(PaymentServiceWebModule)
+)]
 public class BookFlashSalesWebModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)

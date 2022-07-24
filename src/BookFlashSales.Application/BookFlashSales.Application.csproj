@@ -13,12 +13,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Volo.Abp.Account.Application" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.Identity.Application" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="5.3.1" />
-    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="5.3.1" />
+    <PackageReference Include="EasyAbp.EShop.Application" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.Application" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Orders.Plugins.FlashSales.Application" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Products.Plugins.FlashSales.Application" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.PaymentService.Application" Version="$(PaymentServiceVersion)" />
+    <PackageReference Include="Volo.Abp.Account.Application" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Identity.Application" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.PermissionManagement.Application" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Application" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.FeatureManagement.Application" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Application" Version="$(AbpVersion)" />
   </ItemGroup>
 
 </Project>
