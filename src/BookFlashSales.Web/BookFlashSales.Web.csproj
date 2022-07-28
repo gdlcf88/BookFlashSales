@@ -31,6 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DistributedLock.Redis" Version="1.0.2" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
   </ItemGroup>
@@ -47,6 +48,8 @@
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Authentication.JwtBearer" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="$(AbpVersion)" />
+    <PackageReference Include="Volo.Abp.DistributedLocking" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.Identity.Web" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.Account.Web.IdentityServer" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.TenantManagement.Web" Version="$(AbpVersion)" />
