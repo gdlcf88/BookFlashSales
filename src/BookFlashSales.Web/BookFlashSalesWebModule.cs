@@ -10,11 +10,13 @@ using BookFlashSales.EntityFrameworkCore;
 using BookFlashSales.Localization;
 using BookFlashSales.MultiTenancy;
 using BookFlashSales.Web.Menus;
+using BookFlashSales.Web.Security;
 using EasyAbp.EShop.Plugins.FlashSales.Web;
 using EasyAbp.EShop.Web;
 using EasyAbp.PaymentService.Web;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
@@ -34,6 +36,7 @@ using Volo.Abp.DistributedLocking;
 using Volo.Abp.Identity.Web;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
+using Volo.Abp.Security.Claims;
 using Volo.Abp.SettingManagement.Web;
 using Volo.Abp.Swashbuckle;
 using Volo.Abp.TenantManagement.Web;
@@ -93,12 +96,19 @@ public class BookFlashSalesWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+
+        EnableStressTest(context.Services);
         
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
         {
             var connection = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
             return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
         });
+    }
+
+    private static void EnableStressTest(IServiceCollection services)
+    {
+        services.Replace(ServiceDescriptor.Singleton<ICurrentPrincipalAccessor, StressTestCurrentPrincipalAccessor>());
     }
 
     private void ConfigureUrls(IConfiguration configuration)
