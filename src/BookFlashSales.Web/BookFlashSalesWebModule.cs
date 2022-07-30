@@ -12,6 +12,9 @@ using BookFlashSales.MultiTenancy;
 using BookFlashSales.Web.Menus;
 using BookFlashSales.Web.Security;
 using EasyAbp.EShop.Plugins.FlashSales.Web;
+using EasyAbp.EShop.Plugins.Inventories.DaprActors;
+using EasyAbp.EShop.Products.DaprActorsInventory;
+using EasyAbp.EShop.Products.Options;
 using EasyAbp.EShop.Web;
 using EasyAbp.PaymentService.Web;
 using Medallion.Threading;
@@ -63,6 +66,7 @@ namespace BookFlashSales.Web;
     typeof(AbpDistributedLockingModule),
     typeof(EShopWebModule),
     typeof(EShopPluginsFlashSalesWebModule),
+    typeof(EShopPluginsInventoriesDaprActorsAspNetCoreModule),
     typeof(PaymentServiceWebModule)
 )]
 public class BookFlashSalesWebModule : AbpModule
@@ -103,6 +107,12 @@ public class BookFlashSalesWebModule : AbpModule
         {
             var connection = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
             return new RedisDistributedSynchronizationProvider(connection.GetDatabase());
+        });
+        
+        Configure<EShopProductsOptions>(options =>
+        {
+            // Configure as the default inventory provider
+            options.DefaultInventoryProviderName = DaprActorsProductInventoryProvider.DaprActorsProductInventoryProviderName;
         });
     }
 

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using BookFlashSales.MultiTenancy;
 using EasyAbp.EShop;
 using EasyAbp.EShop.Plugins.FlashSales;
+using EasyAbp.EShop.Products.DaprActorsInventory;
 using EasyAbp.PaymentService;
 using Volo.Abp.AuditLogging;
 using Volo.Abp.BackgroundJobs;
@@ -33,6 +34,7 @@ namespace BookFlashSales;
     typeof(AbpEmailingModule),
     typeof(EShopDomainModule),
     typeof(EShopPluginsFlashSalesDomainModule),
+    typeof(EShopProductsDaprActorsInventoryDomainModule),
     typeof(PaymentServiceDomainModule)
 )]
 public class BookFlashSalesDomainModule : AbpModule

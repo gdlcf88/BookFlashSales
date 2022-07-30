@@ -14,6 +14,7 @@
   <ItemGroup>
     <PackageReference Include="EasyAbp.EShop.Domain" Version="$(EShopVersion)" />
     <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.Domain" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Products.DaprActorsInventory.Domain" Version="$(EShopVersion)" />
     <PackageReference Include="EasyAbp.PaymentService.Domain" Version="$(PaymentServiceVersion)" />
     <PackageReference Include="Volo.Abp.Emailing" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.Identity.Domain" Version="$(AbpVersion)" />

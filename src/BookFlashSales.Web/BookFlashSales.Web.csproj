@@ -42,6 +42,7 @@
     <ProjectReference Include="..\BookFlashSales.EntityFrameworkCore\BookFlashSales.EntityFrameworkCore.csproj" />
     <PackageReference Include="EasyAbp.EShop.Web" Version="$(EShopVersion)" />
     <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.Web" Version="$(EShopVersion)" />
+    <PackageReference Include="EasyAbp.EShop.Plugins.Inventories.DaprActors.AspNetCore" Version="3.0.0-preview.3" />
     <PackageReference Include="EasyAbp.PaymentService.Web" Version="$(PaymentServiceVersion)" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
