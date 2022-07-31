@@ -7,7 +7,6 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["NuGet.Config", "."]
 COPY ["src/BookFlashSales.Web/BookFlashSales.Web.csproj", "src/BookFlashSales.Web/"]
 COPY ["src/BookFlashSales.Application/BookFlashSales.Application.csproj", "src/BookFlashSales.Application/"]
 COPY ["src/BookFlashSales.Domain/BookFlashSales.Domain.csproj", "src/BookFlashSales.Domain/"]
