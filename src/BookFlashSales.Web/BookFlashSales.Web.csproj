@@ -44,6 +44,7 @@
     <PackageReference Include="EasyAbp.EShop.Plugins.FlashSales.Web" Version="$(EShopVersion)" />
     <PackageReference Include="EasyAbp.EShop.Plugins.Inventories.DaprActors.AspNetCore" Version="3.0.0-preview.3" />
     <PackageReference Include="EasyAbp.PaymentService.Web" Version="$(PaymentServiceVersion)" />
+    <PackageReference Include="Serilog.Sinks.Seq" Version="5.1.1" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.Autofac" Version="$(AbpVersion)" />
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="$(AbpVersion)" />

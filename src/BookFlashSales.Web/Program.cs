@@ -10,7 +10,7 @@ namespace BookFlashSales.Web;
 
 public class Program
 {
-    public async static Task<int> Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         Log.Logger = new LoggerConfiguration()
 #if DEBUG
@@ -31,7 +31,15 @@ public class Program
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
-                .UseSerilog();
+// #if DEBUG
+//                 .UseSerilog();
+//             
+// #else
+                .UseSerilog((context, logger) =>
+                    {
+                        logger.ReadFrom.Configuration(context.Configuration);
+                    });
+// #endif
             await builder.AddApplicationAsync<BookFlashSalesWebModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
