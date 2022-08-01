@@ -21,7 +21,7 @@ pipeline {
           sh 'git clone https://github.com/hueifeng/BookFlashSales'
           sh 'ls'
           sh 'cd BookFlashSales && podman build -f src/BookFlashSales.Web/Dockerfile .'
-          sh 'podman push hueifeng/bookflashsales-api:latest'
+          sh 'podman push docker.io/hueifeng/bookflashsales-api:latest'
         }
 
       }
