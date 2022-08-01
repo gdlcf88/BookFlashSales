@@ -20,8 +20,8 @@ pipeline {
           sh 'echo $DOCKER_HUB | podman login -u hueifeng --password-stdin'
           sh 'git clone https://github.com/hueifeng/BookFlashSales'
           sh 'ls'
-          sh 'cd BookFlashSales && podman build  -t hueifeng/bookflashsales-api:latest -f src/BookFlashSales.Web/Dockerfile .'
-          sh 'podman push hueifeng/bookflashsales-api:latest'
+          sh 'cd BookFlashSales && podman build  -t docker.io/hueifeng/bookflashsales-api:latest -f src/BookFlashSales.Web/Dockerfile .'
+          sh 'podman push docker.io/hueifeng/bookflashsales-api:latest'
         }
 
       }
