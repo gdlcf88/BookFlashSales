@@ -21,7 +21,7 @@ pipeline {
           sh 'ls'
           sh 'cd BookFlashSales && podman build -f src/BookFlashSales.Web/Dockerfile .  --tag bookflashsales' 
           sh 'podman tag bookflashsales docker.io/hueifeng/bookflashsales-api:latest'
-          sh 'echo $DOCKER_HUB | podman login docker.io -u hueifeng --password-stdin'
+          sh 'echo $DOCKER_HUB | podman login -u hueifeng --password-stdin docker.io'
           sh 'podman push docker.io/hueifeng/bookflashsales-api:latest'
         }
 
