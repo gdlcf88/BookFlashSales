@@ -9,7 +9,7 @@ pipeline {
   stages {
  stage('Clone repository') {
       steps {
-        checkout([$class: 'GitSCM', branches: [[name: 'master']], 
+        checkout([$class: 'GitSCM', branches: [[name: 'main']], 
                     extensions: [[$class: 'CloneOption', depth: 1, shallow: true]], userRemoteConfigs: [[url: 'https://github.com/hueifeng/BookFlashSales']]
                 ])
       }
