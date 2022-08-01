@@ -17,11 +17,11 @@ pipeline {
       agent none
       steps {
         container('base') {
-          sh 'echo $DOCKER_HUB | docker login -u hueifeng --password-stdin'
+          sh 'echo $DOCKER_HUB | podman login -u hueifeng --password-stdin'
           sh 'git clone https://github.com/hueifeng/BookFlashSales'
           sh 'ls'
           sh 'cd BookFlashSales && podman build -f src/BookFlashSales.Web/Dockerfile .'
-          sh 'docker push hueifeng/bookflashsales-api:latest'
+          sh 'podman push hueifeng/bookflashsales-api:latest'
         }
 
       }
