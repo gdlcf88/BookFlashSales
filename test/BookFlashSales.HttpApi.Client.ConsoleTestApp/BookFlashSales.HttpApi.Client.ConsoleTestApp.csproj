@@ -11,7 +11,11 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Remove="appsettings.secrets.json" />
+    <None Condition="Exists('appsettings.secrets.json')" Remove="appsettings.secrets.json" />
+    <Content Condition="Exists('appsettings.secrets.json')"  Include="appsettings.secrets.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
