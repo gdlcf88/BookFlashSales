@@ -13,24 +13,15 @@ pipeline {
                 ])
       }
     }
-    stage ('install podman') {
-            steps {
-                container ('base') {
-                    
-                    sh 'cd /usr'
-                    sh 'ls'
-                    
-                }
-            }
-        }
     stage('build & push') {
       agent none
       steps {
         container('base') {
+          sh 'echo $DOCKER_HUB | docker login -u hueifeng --password-stdin'
           sh 'git clone https://github.com/hueifeng/BookFlashSales'
           sh 'ls'
           sh 'cd BookFlashSales && podman build -f src/BookFlashSales.Web/Dockerfile .'
-        //  sh 'docker push  $REGISTRY/$HARBOR_NAMESPACE/$APP_NAME:devops-test'
+          sh 'docker push hueifeng/bookflashsales-api:latest'
         }
 
       }
@@ -42,5 +33,6 @@ pipeline {
         DOCKERHUB_USERNAME = 'ks-devops-harbor'
         HARBOR_NAMESPACE = 'ks-devops-harbor'
         APP_NAME = 'easy-java'
+        DOCKER_HUB= credentials('docker')
       }
 }
