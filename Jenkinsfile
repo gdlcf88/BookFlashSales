@@ -34,6 +34,6 @@ pipeline {
         DOCKERHUB_USERNAME = 'ks-devops-harbor'
         HARBOR_NAMESPACE = 'ks-devops-harbor'
         APP_NAME = 'easy-java'
-        DOCKER_HUB= credentials('docker')
+        DOCKERHUB_CREDENTIAL = credentials('docker')
       }
 }
