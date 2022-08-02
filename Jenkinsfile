@@ -19,11 +19,10 @@ pipeline {
         container('base') {
           sh 'git clone https://github.com/hueifeng/BookFlashSales'
           sh 'ls'
-          sh 'podman login  docker.io -u $DOCKERHUB_CREDENTIAL_USR -p $DOCKERHUB_CREDENTIAL_PSW'
+          sh 'echo $DOCKERHUB_CREDENTIAL_PSW | podman login -u $DOCKERHUB_CREDENTIAL_USR --password-stdin'
           sh 'cd BookFlashSales && podman build -f src/BookFlashSales.Web/Dockerfile . --tag bookflashsales' 
           sh 'podman tag bookflashsales docker.io/hueifeng/bookflashsales-api'
           sh 'podman images'
-          //  sh 'echo $DOCKERHUB_CREDENTIAL_PSW | podman login -u $DOCKERHUB_CREDENTIAL_USR --password-stdin'
           sh 'podman push docker.io/hueifeng/bookflashsales-api'
         }
 
