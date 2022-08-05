@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
@@ -19,6 +20,7 @@ using EasyAbp.EShop.Web;
 using EasyAbp.PaymentService.Web;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
@@ -100,6 +102,7 @@ public class BookFlashSalesWebModule : AbpModule
         ConfigureNavigationServices();
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
+        ConfigureCors(context, configuration);
 
         EnableStressTest(context.Services);
         
@@ -121,6 +124,28 @@ public class BookFlashSalesWebModule : AbpModule
     private static void EnableStressTest(IServiceCollection services)
     {
         services.Replace(ServiceDescriptor.Singleton<ICurrentPrincipalAccessor, StressTestCurrentPrincipalAccessor>());
+    }
+
+    private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
+    {
+        context.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .WithOrigins(
+                        configuration["App:CorsOrigins"]
+                            .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                            .Select(o => o.RemovePostFix("/"))
+                            .ToArray()
+                    )
+                    .WithAbpExposedHeaders()
+                    .SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
+            });
+        });
     }
 
     private void ConfigureUrls(IConfiguration configuration)
@@ -256,6 +281,7 @@ public class BookFlashSalesWebModule : AbpModule
         app.UseCorrelationId();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseCors();
         app.UseAuthentication();
         app.UseJwtTokenMiddleware();
 
