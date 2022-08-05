@@ -1,4 +1,5 @@
-﻿using Volo.Abp.Identity;
+﻿using Volo.Abp.Account;
+using Volo.Abp.Identity;
 using Volo.Abp.ObjectExtending;
 using Volo.Abp.Threading;
 
@@ -23,6 +24,9 @@ public static class BookFlashSalesDtoExtensions
                  * See the documentation for more:
                  * https://docs.abp.io/en/abp/latest/Object-Extensions
                  */
+
+                ObjectExtensionManager.Instance.AddOrUpdateProperty<string>(
+                    new[] { typeof(ProfileDto), typeof(UpdateProfileDto) }, "Address");
         });
     }
 }
