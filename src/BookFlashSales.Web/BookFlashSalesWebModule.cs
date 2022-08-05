@@ -103,6 +103,8 @@ public class BookFlashSalesWebModule : AbpModule
 
         EnableStressTest(context.Services);
         
+        context.Services.ConfigureNonBreakingSameSiteCookies();
+
         context.Services.AddSingleton<IDistributedLockProvider>(sp =>
         {
             var connection = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
@@ -250,6 +252,7 @@ public class BookFlashSalesWebModule : AbpModule
             app.UseErrorPage();
         }
 
+        app.UseCookiePolicy();
         app.UseCorrelationId();
         app.UseStaticFiles();
         app.UseRouting();
