@@ -67,5 +67,23 @@ public static class BookFlashSalesModuleExtensionConfigurator
          * See the documentation for more:
          * https://docs.abp.io/en/abp/latest/Module-Entity-Extensions
          */
+        
+        ObjectExtensionManager.Instance.Modules()
+            .ConfigureIdentity(identity =>
+            {
+                identity.ConfigureUser(user =>
+                {
+                    user.AddOrUpdateProperty<string>( //property type: string
+                        "Address", //property name
+                        property =>
+                        {
+                            //validation rules
+                            property.Attributes.Add(new StringLengthAttribute(128) {MinimumLength = 4});
+
+                            //...other configurations for this property
+                        }
+                    );
+                });
+            });
     }
 }
