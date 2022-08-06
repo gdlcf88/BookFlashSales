@@ -27,6 +27,9 @@ public static class BookFlashSalesDtoExtensions
 
                 ObjectExtensionManager.Instance.AddOrUpdateProperty<string>(
                     new[] { typeof(ProfileDto), typeof(UpdateProfileDto) }, "Address");
+
+                ObjectExtensionManager.Instance.AddOrUpdateProperty<string>(
+                    new[] { typeof(ProfileDto), typeof(UpdateProfileDto) }, "Wishes");
         });
     }
 }

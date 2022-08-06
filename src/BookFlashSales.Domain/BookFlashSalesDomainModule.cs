@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using BookFlashSales.MultiTenancy;
 using EasyAbp.EShop;
+using EasyAbp.EShop.Orders.Settings;
 using EasyAbp.EShop.Plugins.FlashSales;
 using EasyAbp.EShop.Products.DaprActorsInventory;
 using EasyAbp.PaymentService;
@@ -41,6 +42,8 @@ public class BookFlashSalesDomainModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        OrdersSettingDefinitionProvider.DefaultCurrency = "CNY";
+
         Configure<AbpMultiTenancyOptions>(options =>
         {
             options.IsEnabled = MultiTenancyConsts.IsEnabled;
