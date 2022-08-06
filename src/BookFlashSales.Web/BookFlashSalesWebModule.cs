@@ -21,6 +21,7 @@ using EasyAbp.PaymentService.Web;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
@@ -36,6 +37,7 @@ using Volo.Abp.AspNetCore.Mvc.UI.Theme.Shared;
 using Volo.Abp.AspNetCore.Serilog;
 using Volo.Abp.Autofac;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Caching;
 using Volo.Abp.Caching.StackExchangeRedis;
 using Volo.Abp.DistributedLocking;
 using Volo.Abp.Identity.Web;
@@ -103,6 +105,8 @@ public class BookFlashSalesWebModule : AbpModule
         ConfigureAutoApiControllers();
         ConfigureSwaggerServices(context.Services);
         ConfigureCors(context, configuration);
+        ConfigureCache(configuration);
+        ConfigureDataProtection(context, configuration, hostingEnvironment);
 
         EnableStressTest(context.Services);
         
@@ -119,6 +123,24 @@ public class BookFlashSalesWebModule : AbpModule
             // Configure as the default inventory provider
             options.DefaultInventoryProviderName = DaprActorsProductInventoryProvider.DaprActorsProductInventoryProviderName;
         });
+    }
+
+    private void ConfigureCache(IConfiguration configuration)
+    {
+        Configure<AbpDistributedCacheOptions>(options => { options.KeyPrefix = "BookFlashSales:"; });
+    }
+
+    private void ConfigureDataProtection(
+        ServiceConfigurationContext context,
+        IConfiguration configuration,
+        IWebHostEnvironment hostingEnvironment)
+    {
+        var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("BookFlashSales");
+        if (!hostingEnvironment.IsDevelopment())
+        {
+            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "BookFlashSales-Protection-Keys");
+        }
     }
 
     private static void EnableStressTest(IServiceCollection services)
