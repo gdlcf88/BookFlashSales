@@ -158,7 +158,7 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
                 requireClientSecret: false,
                 redirectUri: webClientRootUrl,
                 postLogoutRedirectUri: webClientRootUrl,
-                corsOrigins: new[] { webClientRootUrl.RemovePostFix("/"), "https://flashsales.easyabp.io", "http://localhost:4200" }
+                corsOrigins: new[] { webClientRootUrl.RemovePostFix("/"), "http://flashsales.easyabp.io", "http://localhost:4200" }
             );
         }
 
