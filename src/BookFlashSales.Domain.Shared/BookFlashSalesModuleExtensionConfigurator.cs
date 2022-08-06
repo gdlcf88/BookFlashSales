@@ -83,6 +83,16 @@ public static class BookFlashSalesModuleExtensionConfigurator
                             //...other configurations for this property
                         }
                     );
+                    user.AddOrUpdateProperty<string>( //property type: string
+                        "Wishes", //property name
+                        property =>
+                        {
+                            //validation rules
+                            property.Attributes.Add(new StringLengthAttribute(128) {MinimumLength = 0});
+
+                            //...other configurations for this property
+                        }
+                    );
                 });
             });
     }
