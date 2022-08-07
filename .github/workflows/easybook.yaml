@@ -11,7 +11,7 @@ env:
     CLUSTER_RESOURCE_GROUP: aks
     CONTAINER_NAME: easybook
     DEPLOYMENT_MANIFEST_PATH: |
-        ./Jenkinsfile
+        ./bookflashsales.yaml
 jobs:
     buildImage:
         permissions:
