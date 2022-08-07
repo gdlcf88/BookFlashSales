@@ -15,18 +15,20 @@ using Volo.Abp.EventBus.Distributed;
 namespace BookFlashSales.Web;
 
 [Dependency(TryRegister = true)]
-[ExposeServices(typeof(StressTestFlashSalePlanAppService), typeof(FlashSalePlanAppService), typeof(IFlashSalePlanAppService))]
+[ExposeServices(typeof(StressTestFlashSalePlanAppService), typeof(FlashSalePlanAppService),
+    typeof(IFlashSalePlanAppService))]
 public class StressTestFlashSalePlanAppService : FlashSalePlanAppService
 {
     public StressTestFlashSalePlanAppService(IFlashSalePlanRepository flashSalePlanRepository,
         IProductAppService productAppService, IDistributedCache<FlashSalePlanPreOrderCacheItem> tokenDistributedCache,
-        IDistributedCache<FlashSalePlanCacheItem, Guid> planDistributedCache, IDistributedEventBus distributedEventBus,
+        IDistributedCache<FlashSalePlanCacheItem, Guid> planDistributedCache,
+        IDistributedCache<ProductCacheItem, Guid> productDistributedCache, IDistributedEventBus distributedEventBus,
         IFlashSaleResultRepository flashSaleResultRepository, IAbpDistributedLock distributedLock,
         IFlashSalePlanHasher flashSalePlanHasher, IFlashSaleInventoryManager flashSaleInventoryManager,
         IDistributedCache distributedCache, IOptionsMonitor<FlashSalesOptions> optionsMonitor) : base(
-        flashSalePlanRepository, productAppService, tokenDistributedCache, planDistributedCache, distributedEventBus,
-        flashSaleResultRepository, distributedLock, flashSalePlanHasher, flashSaleInventoryManager, distributedCache,
-        optionsMonitor)
+        flashSalePlanRepository, productAppService, tokenDistributedCache, planDistributedCache,
+        productDistributedCache, distributedEventBus, flashSaleResultRepository, distributedLock, flashSalePlanHasher,
+        flashSaleInventoryManager, distributedCache, optionsMonitor)
     {
     }
 
@@ -40,6 +42,6 @@ public class StressTestFlashSalePlanAppService : FlashSalePlanAppService
             ProductId = Guid.Parse("3a0580c5-cdaa-db74-3733-4d4d72354773"),
             ProductSkuId = Guid.Parse("3a0580c5-d0a2-f7cc-ee6c-313d59b4b61b"),
             InventoryProviderName = DaprActorsProductInventoryProvider.DaprActorsProductInventoryProviderName
-        };  // for stress tests
+        }; // for stress tests
     }
 }
