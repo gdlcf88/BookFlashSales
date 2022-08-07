@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,7 @@ using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
+using Volo.Abp.AspNetCore.Auditing;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
@@ -131,6 +133,15 @@ public class BookFlashSalesWebModule : AbpModule
         Configure<PaymentServiceOptions>(options =>
         {
             options.Providers.Configure<FreePaymentServiceProvider>(FreePaymentServiceProvider.PaymentMethod);
+        });
+
+        // Disable auditing for flash-sales
+        Configure<AbpAspNetCoreAuditingOptions>(options =>
+        {
+            options.IgnoredUrls.AddIfNotContains("/api/e-shop/plugins/flash-sales/flash-sale-plan");
+            options.IgnoredUrls.AddIfNotContains("/ping");
+            options.IgnoredUrls.AddIfNotContains("/healthz");
+            options.IgnoredUrls.AddIfNotContains("/actors");
         });
     }
 

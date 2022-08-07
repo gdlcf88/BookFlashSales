@@ -13,7 +13,7 @@ export const environment = {
     issuer: 'http://flashsales.easyabp.io',
     redirectUri: baseUrl,
     clientId: 'BookFlashSales_App',
-    responseType: 'code',
+    responseType: 'password',
     scope: 'offline_access BookFlashSales',
     requireHttps: false
   },
