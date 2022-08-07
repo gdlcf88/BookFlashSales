@@ -1,0 +1,36 @@
+<div class="register">
+  <div class="content">
+    <div class="title">
+      登录
+    </div>
+    <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>手机号码</mat-label>
+        <input id="username" minlength="6" maxlength="24" formControlName="username" type="tel" matInput placeholder="请输入手机号码">
+        <mat-error *ngIf="this.validateForm.controls['username'].hasError('required')">
+          手机号码<strong>必填</strong>
+        </mat-error>
+        <mat-error *ngIf="this.validateForm.controls['username'].hasError('pattern')">
+          请输入<strong>11位</strong>手机号码
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>密码</mat-label>
+        <input id="password" minlength="6" maxlength="24" formControlName="password" type="password" matInput placeholder="请输入密码">
+        <mat-error *ngIf="this.validateForm.controls['password'].hasError('required')">
+          密码<strong>必填</strong>
+        </mat-error>
+        <mat-error *ngIf="this.validateForm.controls['password'].hasError('pattern')">
+          密码<strong>6-24位，包含大小写字母，数字和特殊符号</strong>
+        </mat-error>
+      </mat-form-field>
+      <div class="register-router">
+        <div>没有账户? <a (click)="jumpRouter('register')">立即注册</a></div>
+      </div>
+    </form>
+    <div class="operation">
+      <button (click)="submitForm()" mat-raised-button color="primary">登录</button>
+    </div>
+  </div>
+</div>

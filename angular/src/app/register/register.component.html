@@ -1,0 +1,50 @@
+<div class="register">
+  <div class="content">
+    <div class="title">
+      注册账户
+    </div>
+    <div (click)="jumpRouter('login')" class="login-router">
+      返回登录
+    </div>
+    <form class="example-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>手机号码</mat-label>
+        <span matPrefix>+86 &nbsp;</span>
+        <input id="phone" formControlName="phone" type="tel" matInput placeholder="请输入11位手机号码">
+        <mat-error *ngIf="this.validateForm.controls['phone'].hasError('pattern')">
+          请输入<strong>11位</strong>手机号码
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>密码</mat-label>
+        <input id="password" formControlName="password" type="password" matInput placeholder="请输入密码">
+        <mat-error *ngIf="this.validateForm.controls['password'].hasError('required')">
+          密码<strong>必填</strong>
+        </mat-error>
+        <mat-error *ngIf="this.validateForm.controls['password'].hasError('pattern')">
+          密码<strong>6-24位，包含大小写字母，数字和特殊符号</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>收件人</mat-label>
+        <input id="name" formControlName="name" matInput placeholder="请输入收件人姓名">
+        <mat-error *ngIf="this.validateForm.controls['name'].hasError('required')">
+          收件人<strong>必填</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>收货地址</mat-label>
+        <textarea id="address" formControlName="address" matInput placeholder="请留下您的收货地址，方便邮寄奖品"></textarea>
+        <mat-error *ngIf="this.validateForm.controls['address'].hasError('required')">
+          收货地址<strong>必填</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <div class="operation">
+      <button (click)="submitForm()" mat-raised-button color="primary">注册</button>
+    </div>
+  </div>
+</div>

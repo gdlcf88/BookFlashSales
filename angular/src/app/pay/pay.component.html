@@ -1,0 +1,119 @@
+<div class="register">
+  <div class="content">
+    <div class="title">
+      {{ orderData ? '您已抢购成功，订单详情' : 'ABP群友0元抢书活动'}}
+    </div>
+    <div class="user-info">
+      <span style="font-weight: 500;margin-right: 6px;">用户:</span>
+      <span style="margin-right: 6px">{{(currentUser$ | async).userName}}</span>
+      <a (click)="logout()">注销</a>
+    </div>
+    <div *ngIf="!loading" (click)="selectMode(1)" style="position:absolute;right:30px;top: 30px;color:#0c9da2;cursor: pointer;
+    text-decoration: underline;">
+      查看活动规则
+    </div>
+    <mat-progress-spinner *ngIf="loading"
+        class="example-margin"
+        mode="indeterminate">
+    </mat-progress-spinner>
+    <div *ngIf="loading">
+      正在获取结果...
+    </div>
+    <div *ngIf="videMode == 1 && !loading" class="detail">
+      <!-- <img src="https://abp.io/assets/png/mastering-abp-framework.webp" style="max-width: 250px;"> -->
+      <div style="font-weight: 500">活动规则：</div>
+      <div>1. 本次闪购奖品为与.NET/云原生以及行业相关的书籍，共34本。</div>
+      <div>2. 活动开始时间为2022年8月8日16:00，开始后可在本页面点击按钮抢购。</div>
+      <div>3. 将按注册时手机号发货，请检查手机号是否正确，如手机号有误，奖品将无法寄出。
+      </div>
+      <div>4. 中奖人可得书籍，尽可能按照意愿发货，如有相同意愿，则优先照顾下单更快的中间人。
+      </div>
+      <div>5. 活动奖品全部由【京东快递-到付】寄出，不包邮，运费以小哥核实为准，尽可能给大家争取到运费优惠。</div>
+    </div>
+    <div class="clock" *ngIf="videMode == 2 && !loading">
+      <div *ngIf="!state" class="clock-title">
+        距离开始还有:
+      </div>
+      <div *ngIf="state" class="clock-title" style="color: red;">
+        活动已开始，点击下方立即抢购
+      </div>
+      <div class="clock-content">
+        <div class="time" style="position: relative;">
+          {{day}}
+          <div class="label">天</div>
+        </div>
+        <div class="splice">:</div>
+        <div class="time">
+          {{hour}}
+          <div class="label">时</div>
+        </div>
+        <div class="splice">:</div>
+        <div class="time">
+          {{minite}}
+          <div class="label">分</div>
+        </div>
+        <div class="splice">:</div>
+        <div class="time">
+          {{sec}}
+          <div class="label">秒</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="videMode == 3 && !loading" class="pay">
+      <div>
+        抢购资格成功！
+      </div>
+    </div>
+    <div *ngIf="videMode == 4 && !loading" class="order">
+      <div class="order-info">
+        <div>
+          <span class="label">订单号:</span>
+          <span>{{orderData.orderNumber}}</span>
+        </div>
+        <div>
+          <span class="label">订单状态:</span>
+          <span>{{orderData.orderStatus == 1 ? '等待支付' : orderData.orderStatus == 2 ? '支付完成' : orderData.orderStatus == 3 ? '订单完成': '订单取消'}}</span>
+        </div>
+        <div>
+          <span class="label">订单总价格:</span>
+          <span>{{orderData.productTotalPrice}}</span>
+        </div>
+        <div>
+          <span class="label">发货快递:</span>
+          <span>{{orderData.extraProperties && orderData.extraProperties.expressProvider ? orderData.extraProperties.expressProvider : '暂未发货'}}</span>
+        </div>
+        <div>
+          <span class="label">快递单号:</span>
+          <span>{{orderData.extraProperties &&  orderData.extraProperties.trackingNumber ? orderData.extraProperties.trackingNumber : '暂未发货'}}</span>
+        </div>
+        <div>
+          <span class="label">订单商品({{orderData.orderLines.length}}):</span>
+          <div style="margin-left: 12px; font-size: 14px;" *ngFor="let item of orderData.orderLines">
+            <div>
+              <span class="label">商品名:</span>
+              <span>{{item.productDisplayName}}</span>
+            </div>
+            <div>
+              <span class="label">金额:</span>
+              <span>{{item.totalPrice}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div  *ngIf="!loading" class="operation">
+      <button 
+      [disabled]="!state"
+      *ngIf="videMode < 3"
+      (click)="submitForm()" mat-raised-button color="primary">
+        {{!state ? '尚未开始' : '立即抢购'}}
+      </button>
+      <button 
+      [disabled]="!state"
+      *ngIf="orderData && orderData.orderStatus == 1"
+      (click)="payOrder()" mat-raised-button color="primary">
+        立即支付
+      </button>
+    </div>
+  </div>
+</div>
