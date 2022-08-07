@@ -51,7 +51,10 @@ public class DefaultRoleDataSeedContributor : IDataSeedContributor, ITransientDe
             "EasyAbp.EShop.Orders.Order.Create",
             "EasyAbp.EShop.Orders.Order.Cancel",
             "EasyAbp.EShop.Payments.Payment",
-            "EasyAbp.EShop.Payments.Payment.Create"
+            "EasyAbp.EShop.Payments.Payment.Create",
+            "EasyAbp.EShop.Plugins.FlashSales.FlashSalePlan",
+            "EasyAbp.EShop.Plugins.FlashSales.FlashSalePlan.PreOrder",
+            "EasyAbp.EShop.Plugins.FlashSales.FlashSaleResult"
         };
 
         foreach (var permission in permissions)
