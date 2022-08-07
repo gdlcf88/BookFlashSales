@@ -31,18 +31,19 @@ public class Program
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
-// #if DEBUG
-//                 .UseSerilog();
-//             
-// #else
+                // #if DEBUG
+                //                 .UseSerilog();
+                //             
+                // #else
                 .UseSerilog((context, logger) =>
                     {
                         logger.ReadFrom.Configuration(context.Configuration);
                     });
-// #endif
+            // #endif
             await builder.AddApplicationAsync<BookFlashSalesWebModule>();
             var app = builder.Build();
             await app.InitializeApplicationAsync();
+            app.MapGet("ping", () => Task.CompletedTask);
             await app.RunAsync();
             return 0;
         }
