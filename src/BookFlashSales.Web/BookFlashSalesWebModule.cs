@@ -145,6 +145,8 @@ public class BookFlashSalesWebModule : AbpModule
 
     private static void EnableStressTest(IServiceCollection services)
     {
+        services.AddAlwaysAllowAuthorization();
+
         services.Replace(ServiceDescriptor.Singleton<ICurrentPrincipalAccessor, StressTestCurrentPrincipalAccessor>());
     }
 
