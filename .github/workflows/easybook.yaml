@@ -9,7 +9,7 @@ env:
     AZURE_CONTAINER_REGISTRY: easyabpregistry
     CLUSTER_NAME: easyabp
     CLUSTER_RESOURCE_GROUP: aks
-    CONTAINER_NAME: easybook
+    CONTAINER_NAME: bookflashsales
     DEPLOYMENT_MANIFEST_PATH: |
         ./bookflashsales.yaml
 jobs:
