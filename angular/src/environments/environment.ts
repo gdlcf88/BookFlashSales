@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'https://342l10t057.goho.co';
+const baseUrl = 'https://localhost:44330';
 
 export const environment = {
   production: true,
@@ -10,7 +10,7 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://342l10t057.goho.co',
+    issuer: 'https://localhost:44330',
     redirectUri: baseUrl,
     clientId: 'BookFlashSales_App',
     responseType: 'password',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://342l10t057.goho.co',
+      url: 'https://localhost:44330',
       rootNamespace: 'BookFlashSales',
     },
   },
