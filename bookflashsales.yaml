@@ -66,7 +66,7 @@ spec:
               mountPath: /tmp
           livenessProbe:
             httpGet:
-              path: /
+              path: /ping
               port: 80
               scheme: HTTP
             initialDelaySeconds: 30
@@ -76,7 +76,7 @@ spec:
             failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /ping
+              path: /
               port: 80
               scheme: HTTP
             initialDelaySeconds: 30
