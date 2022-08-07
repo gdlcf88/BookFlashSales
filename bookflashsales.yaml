@@ -53,8 +53,11 @@ spec:
               protocol: TCP
           resources:
             limits:
-              cpu: 200m
-              memory: 512Mi
+              cpu: '2'
+              memory: 6144Mi
+            requests:
+              cpu: '1'
+              memory: 256Mi
           volumeMounts:
             - name: host-time
               readOnly: true
