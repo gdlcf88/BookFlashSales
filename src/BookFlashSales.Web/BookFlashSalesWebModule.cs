@@ -17,11 +17,14 @@ using EasyAbp.EShop.Plugins.Inventories.DaprActors;
 using EasyAbp.EShop.Products.DaprActorsInventory;
 using EasyAbp.EShop.Products.Options;
 using EasyAbp.EShop.Web;
+using EasyAbp.PaymentService.Options;
+using EasyAbp.PaymentService.Payments;
 using EasyAbp.PaymentService.Web;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using StackExchange.Redis;
@@ -122,6 +125,11 @@ public class BookFlashSalesWebModule : AbpModule
         {
             // Configure as the default inventory provider
             options.DefaultInventoryProviderName = DaprActorsProductInventoryProvider.DaprActorsProductInventoryProviderName;
+        });
+
+        Configure<PaymentServiceOptions>(options =>
+        {
+            options.Providers.Configure<FreePaymentServiceProvider>(FreePaymentServiceProvider.PaymentMethod);
         });
     }
 
@@ -289,6 +297,14 @@ public class BookFlashSalesWebModule : AbpModule
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
+        app.Use(async (context, next) =>
+        {
+            context.Request.Scheme = "https";
+            var httpsHostString = new HostString("342l10t057.goho.co");
+            context.Request.Host = httpsHostString;
+            await next.Invoke();
+        });
+        
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
