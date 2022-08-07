@@ -50,15 +50,15 @@ jobs:
               with:
                 cluster-name: ${{ env.CLUSTER_NAME }}
                 resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
-            - name: ls
+            #- name: ls
               #run: sed -i '0,/Default[^,]*/s//${{ github.sha }}/g' bookflashsales.yaml
-              run: sed 's/Default/${{ github.sha }}/g' ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+              #run: sed 's/Default/${{ github.sha }}/g' ${{ env.DEPLOYMENT_MANIFEST_PATH }}
             - uses: Azure/k8s-deploy@v4
               name: Deploys application
               with:
                 action: deploy
 #                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
-                run: sed 's/Default/${{ github.sha }}/g' ${{ env.DEPLOYMENT_MANIFEST_PATH }}
+                run: sed 's/Default/${{ github.sha }}/g' /tmp/bookflashsales.yaml
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:latest 
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
                 namespace: easyabp
