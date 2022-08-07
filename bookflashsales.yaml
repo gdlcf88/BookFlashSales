@@ -42,7 +42,7 @@ spec:
           emptyDir: {}
       containers:
         - name: container-827j4m
-          image: docker.io/hueifeng/bookflashsales
+          image: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
           ports:
             - name: tcp-443
               containerPort: 443
