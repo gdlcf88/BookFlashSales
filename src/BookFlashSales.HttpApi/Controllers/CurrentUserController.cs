@@ -12,4 +12,11 @@ public class CurrentUserController : BookFlashSalesController
     {
         return Task.FromResult(CurrentUser?.Id.ToString());
     }
+
+    [HttpGet]
+    [Route("hello")]
+    public Task<string> HelloAsync()
+    {
+        return Task.FromResult("World");
+    }
 }
