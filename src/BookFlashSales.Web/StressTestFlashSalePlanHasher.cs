@@ -5,9 +5,9 @@ using Volo.Abp.DependencyInjection;
 
 namespace BookFlashSales.Web;
 
-[Dependency(ReplaceServices = true)]
-[ExposeServices(typeof(MyFlashSalePlanHasher), typeof(FlashSalePlanHasher), typeof(IFlashSalePlanHasher))]
-public class MyFlashSalePlanHasher : FlashSalePlanHasher
+[Dependency(TryRegister = true)]
+[ExposeServices(typeof(StressTestFlashSalePlanHasher), typeof(FlashSalePlanHasher), typeof(IFlashSalePlanHasher))]
+public class StressTestFlashSalePlanHasher : FlashSalePlanHasher
 {
     public override Task<string> HashAsync(DateTime? planLastModificationTime, DateTime? productLastModificationTime,
         DateTime? productSkuLastModificationTime)

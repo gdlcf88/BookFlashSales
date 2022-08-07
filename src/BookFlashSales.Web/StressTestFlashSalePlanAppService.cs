@@ -14,11 +14,11 @@ using Volo.Abp.EventBus.Distributed;
 
 namespace BookFlashSales.Web;
 
-[Dependency(ReplaceServices = true)]
-[ExposeServices(typeof(MyFlashSalePlanAppService), typeof(FlashSalePlanAppService), typeof(IFlashSalePlanAppService))]
-public class MyFlashSalePlanAppService : FlashSalePlanAppService
+[Dependency(TryRegister = true)]
+[ExposeServices(typeof(StressTestFlashSalePlanAppService), typeof(FlashSalePlanAppService), typeof(IFlashSalePlanAppService))]
+public class StressTestFlashSalePlanAppService : FlashSalePlanAppService
 {
-    public MyFlashSalePlanAppService(IFlashSalePlanRepository flashSalePlanRepository,
+    public StressTestFlashSalePlanAppService(IFlashSalePlanRepository flashSalePlanRepository,
         IProductAppService productAppService, IDistributedCache<FlashSalePlanPreOrderCacheItem> tokenDistributedCache,
         IDistributedCache<FlashSalePlanCacheItem, Guid> planDistributedCache, IDistributedEventBus distributedEventBus,
         IFlashSaleResultRepository flashSaleResultRepository, IAbpDistributedLock distributedLock,

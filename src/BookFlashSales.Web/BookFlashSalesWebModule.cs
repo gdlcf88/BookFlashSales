@@ -12,6 +12,7 @@ using BookFlashSales.Localization;
 using BookFlashSales.MultiTenancy;
 using BookFlashSales.Web.Menus;
 using BookFlashSales.Web.Security;
+using EasyAbp.EShop.Plugins.FlashSales.FlashSalePlans;
 using EasyAbp.EShop.Plugins.FlashSales.Web;
 using EasyAbp.EShop.Plugins.Inventories.DaprActors;
 using EasyAbp.EShop.Products.DaprActorsInventory;
@@ -156,6 +157,10 @@ public class BookFlashSalesWebModule : AbpModule
         services.AddAlwaysAllowAuthorization();
 
         services.Replace(ServiceDescriptor.Singleton<ICurrentPrincipalAccessor, StressTestCurrentPrincipalAccessor>());
+        services.Replace(ServiceDescriptor.Transient<IFlashSalePlanAppService, StressTestFlashSalePlanAppService>());
+        services.Replace(ServiceDescriptor.Transient<FlashSalePlanAppService, StressTestFlashSalePlanAppService>());
+        services.Replace(ServiceDescriptor.Transient<IFlashSalePlanHasher, StressTestFlashSalePlanHasher>());
+        services.Replace(ServiceDescriptor.Transient<FlashSalePlanHasher, StressTestFlashSalePlanHasher>());
     }
 
     private void ConfigureCors(ServiceConfigurationContext context, IConfiguration configuration)
