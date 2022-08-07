@@ -15,7 +15,6 @@ spec:
   selector:
     matchLabels:
       app: bookflashsales
-      build_number: ${BUILD_NUMBER}
       version: v1
   template:
     metadata:
