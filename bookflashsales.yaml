@@ -21,7 +21,7 @@ spec:
       creationTimestamp: null
       labels:
         app: bookflashsales
-        build_number: '10008'
+        build_number: '10009'
         version: v1
       annotations:
         dapr.io/app-id: bookflashsales
@@ -53,10 +53,8 @@ spec:
               protocol: TCP
           resources:
             limits:
-              cpu: '2'
-              memory: 6144Mi
+              memory: 1024Mi
             requests:
-              cpu: '1'
               memory: 256Mi
           volumeMounts:
             - name: host-time
