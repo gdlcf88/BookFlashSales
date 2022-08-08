@@ -130,8 +130,8 @@ public class EShopDataSeedContributor : IDataSeedContributor, ITransientDependen
             return;
         }
 
-        var beginTime = new DateTime(2022, 8, 8, 16, 0, 0);
-        var endTime = new DateTime(2022, 8, 8, 17, 0, 0);
+        var beginTime = new DateTime(2022, 8, 9, 16, 0, 0);
+        var endTime = new DateTime(2022, 8, 9, 17, 0, 0);
 
         var plan = await _flashSalePlanRepository.InsertAsync(new FlashSalePlan(_guidGenerator.Create(),
             _currentTenant.Id, store.Id, beginTime, endTime, product.Id,
