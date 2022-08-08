@@ -114,7 +114,7 @@ public class BookFlashSalesWebModule : AbpModule
         ConfigureCache(configuration);
         ConfigureDataProtection(context, configuration, hostingEnvironment);
 
-        EnableStressTest(context.Services);
+        // EnableStressTest(context.Services);
         
         context.Services.ConfigureNonBreakingSameSiteCookies();
 
@@ -313,14 +313,6 @@ public class BookFlashSalesWebModule : AbpModule
         var app = context.GetApplicationBuilder();
         var env = context.GetEnvironment();
 
-        app.Use(async (context, next) =>
-        {
-            context.Request.Scheme = "https";
-            var httpsHostString = new HostString("342l10t057.goho.co");
-            context.Request.Host = httpsHostString;
-            await next.Invoke();
-        });
-        
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
