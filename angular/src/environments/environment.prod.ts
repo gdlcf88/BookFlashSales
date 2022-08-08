@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://flashsales.easyabp.io';
+const baseUrl = 'http://service-cibrylqe-1300453004.gz.apigw.tencentcs.com';
 
 export const environment = {
   production: true,

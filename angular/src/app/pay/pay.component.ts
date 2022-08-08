@@ -114,9 +114,17 @@ export class PayComponent implements OnInit {
     })
   }
   initClock(){
-    this.flashSalePlanService.get('3a0542d7-eed4-bb5f-77fd-96f32baecce9').subscribe(res=>{
-      this.beginTime = res.beginTime;
-      this.planId = res.id;
+    let parm: FlashSalePlanGetListInput = {
+      includeUnpublished: false,
+      sorting: '',
+      skipCount: 0,
+      maxResultCount: 1,
+      id: '',
+      extraProperties: {}
+    }
+    this.flashSalePlanService.getList(parm).subscribe(res=>{
+      this.beginTime = res.items[0].beginTime;
+      this.planId = res.items[0].id;
       this.perOrder();
       this.timer = setInterval(() => {
         if (!this.refTime()){
