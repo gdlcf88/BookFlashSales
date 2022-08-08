@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using EasyAbp.EShop.Plugins.FlashSales.FlashSalePlans;
+using EasyAbp.EShop.Plugins.FlashSales.FlashSalePlans.Dtos;
 using EasyAbp.EShop.Plugins.FlashSales.FlashSaleResults;
 using EasyAbp.EShop.Products.DaprActorsInventory;
 using EasyAbp.Eshop.Products.Products;
@@ -12,6 +13,7 @@ using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.DistributedLocking;
 using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.Uow;
 
 namespace BookFlashSales.Web;
 
@@ -45,5 +47,17 @@ public class StressTestFlashSalePlanAppService : FlashSalePlanAppService
             ProductSkuId = Guid.Parse("3a0580c5-d0a2-f7cc-ee6c-313d59b4b61b"),
             InventoryProviderName = DaprActorsProductInventoryProvider.DaprActorsProductInventoryProviderName
         }; // for stress tests
+    }
+
+    [UnitOfWork(IsDisabled = true)]
+    public override Task<FlashSalePlanPreOrderDto> PreOrderAsync(Guid id)
+    {
+        return base.PreOrderAsync(id);
+    }
+
+    [UnitOfWork(IsDisabled = true)]
+    public override Task<FlashSaleOrderResultDto> OrderAsync(Guid id, CreateOrderInput input)
+    {
+        return base.OrderAsync(id, input);
     }
 }

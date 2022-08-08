@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using EasyAbp.EShop.Plugins.FlashSales.FlashSalePlans;
+using EasyAbp.EShop.Plugins.FlashSales.FlashSalePlans.Dtos;
 using EasyAbp.EShop.Plugins.FlashSales.FlashSaleResults;
 using EasyAbp.Eshop.Products.Products;
 using EasyAbp.EShop.Products.Products;
@@ -10,6 +12,7 @@ using Volo.Abp.Caching;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.DistributedLocking;
 using Volo.Abp.EventBus.Distributed;
+using Volo.Abp.Uow;
 
 namespace BookFlashSales.Web;
 
@@ -30,5 +33,17 @@ public class MyFlashSalePlanAppService : FlashSalePlanAppService
         productDistributedCache, distributedEventBus, flashSaleResultRepository, distributedLock, flashSalePlanHasher,
         flashSaleInventoryManager, distributedCache, optionsMonitor)
     {
+    }
+
+    [UnitOfWork(IsDisabled = true)]
+    public override Task<FlashSalePlanPreOrderDto> PreOrderAsync(Guid id)
+    {
+        return base.PreOrderAsync(id);
+    }
+
+    [UnitOfWork(IsDisabled = true)]
+    public override Task<FlashSaleOrderResultDto> OrderAsync(Guid id, CreateOrderInput input)
+    {
+        return base.OrderAsync(id, input);
     }
 }
