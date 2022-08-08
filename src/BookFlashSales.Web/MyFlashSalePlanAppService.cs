@@ -1,8 +1,6 @@
 using System;
-using System.Threading.Tasks;
 using EasyAbp.EShop.Plugins.FlashSales.FlashSalePlans;
 using EasyAbp.EShop.Plugins.FlashSales.FlashSaleResults;
-using EasyAbp.EShop.Products.DaprActorsInventory;
 using EasyAbp.Eshop.Products.Products;
 using EasyAbp.EShop.Products.Products;
 using Microsoft.Extensions.Caching.Distributed;
@@ -16,12 +14,12 @@ using Volo.Abp.EventBus.Distributed;
 namespace BookFlashSales.Web;
 
 [DisableAuditing]
-[Dependency(TryRegister = true)]
-[ExposeServices(typeof(StressTestFlashSalePlanAppService), typeof(FlashSalePlanAppService),
+[Dependency(ReplaceServices = true)]
+[ExposeServices(typeof(MyFlashSalePlanAppService), typeof(FlashSalePlanAppService),
     typeof(IFlashSalePlanAppService))]
-public class StressTestFlashSalePlanAppService : FlashSalePlanAppService
+public class MyFlashSalePlanAppService : FlashSalePlanAppService
 {
-    public StressTestFlashSalePlanAppService(IFlashSalePlanRepository flashSalePlanRepository,
+    public MyFlashSalePlanAppService(IFlashSalePlanRepository flashSalePlanRepository,
         IProductAppService productAppService, IDistributedCache<FlashSalePlanPreOrderCacheItem> tokenDistributedCache,
         IDistributedCache<FlashSalePlanCacheItem, Guid> planDistributedCache,
         IDistributedCache<ProductCacheItem, Guid> productDistributedCache, IDistributedEventBus distributedEventBus,
@@ -32,18 +30,5 @@ public class StressTestFlashSalePlanAppService : FlashSalePlanAppService
         productDistributedCache, distributedEventBus, flashSaleResultRepository, distributedLock, flashSalePlanHasher,
         flashSaleInventoryManager, distributedCache, optionsMonitor)
     {
-    }
-
-    protected override async Task<FlashSalePlanPreOrderCacheItem> GetPreOrderCacheAsync(Guid planId)
-    {
-        return await base.GetPreOrderCacheAsync(planId) ?? new FlashSalePlanPreOrderCacheItem
-        {
-            TenantId = null,
-            HashToken = "my-token",
-            PlanId = planId,
-            ProductId = Guid.Parse("3a0580c5-cdaa-db74-3733-4d4d72354773"),
-            ProductSkuId = Guid.Parse("3a0580c5-d0a2-f7cc-ee6c-313d59b4b61b"),
-            InventoryProviderName = DaprActorsProductInventoryProvider.DaprActorsProductInventoryProviderName
-        }; // for stress tests
     }
 }
