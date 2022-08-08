@@ -21,7 +21,7 @@ spec:
       creationTimestamp: null
       labels:
         app: bookflashsales
-        build_number: '10009'
+        build_number: '10010'
         version: v1
       annotations:
         dapr.io/app-id: bookflashsales
