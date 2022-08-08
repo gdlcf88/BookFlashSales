@@ -79,14 +79,6 @@
           <span>{{orderData.productTotalPrice}}</span>
         </div>
         <div>
-          <span class="label">发货快递:</span>
-          <span>{{orderData.extraProperties && orderData.extraProperties.expressProvider ? orderData.extraProperties.expressProvider : '暂未发货'}}</span>
-        </div>
-        <div>
-          <span class="label">快递单号:</span>
-          <span>{{orderData.extraProperties &&  orderData.extraProperties.trackingNumber ? orderData.extraProperties.trackingNumber : '暂未发货'}}</span>
-        </div>
-        <div>
           <span class="label">订单商品({{orderData.orderLines.length}}):</span>
           <div style="margin-left: 12px; font-size: 14px;" *ngFor="let item of orderData.orderLines">
             <div>

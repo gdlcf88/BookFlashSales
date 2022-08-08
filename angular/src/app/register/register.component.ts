@@ -20,6 +20,7 @@ export class RegisterComponent implements OnInit {
       phone: [null, [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{11}$')]],
       email: [null],
       userName: [null],
+      wishes: [null],
       name: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{6,}$')]],
       address: [null, [Validators.required]]
@@ -35,6 +36,7 @@ export class RegisterComponent implements OnInit {
         extraProperties: {
           'phone': this.validateForm.value.phone,
           'name': this.validateForm.value.name,
+          'wishes': this.validateForm.value.wishes,
           'address':  this.validateForm.value.address
         }
       };

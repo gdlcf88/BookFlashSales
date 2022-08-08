@@ -36,6 +36,14 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>想要的书名</mat-label>
+        <input id="wishes" formControlName="wishes" matInput placeholder="想要的书名，可填多本(选填)">
+        <mat-error *ngIf="this.validateForm.controls['wishes'].hasError('required')">
+          收件人<strong>必填</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>收货地址</mat-label>
         <textarea id="address" formControlName="address" matInput placeholder="请留下您的收货地址，方便邮寄奖品"></textarea>
         <mat-error *ngIf="this.validateForm.controls['address'].hasError('required')">
