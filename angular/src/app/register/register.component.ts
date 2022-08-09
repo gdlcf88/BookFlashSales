@@ -41,7 +41,9 @@ export class RegisterComponent implements OnInit {
         }
       };
       this._account.register(data).subscribe(res=>{
-        this._snackBar.open('注册成功!');
+        this._snackBar.open('注册成功!','关闭',{
+          duration: 2000
+        });
         this.jumpRouter('/login');
       }, err=>{
 
