@@ -8,7 +8,7 @@
       <span style="margin-right: 6px">{{(currentUser$ | async).userName}}</span>
       <a (click)="logout()">注销</a>
     </div>
-    <div *ngIf="!loading" (click)="selectMode(1)" style="position:absolute;right:30px;top: 30px;color:#0c9da2;cursor: pointer;
+    <div *ngIf="!loading" (click)="showOrHideRules()" style="position:absolute;right:30px;top: 30px;color:#0c9da2;cursor: pointer;
     text-decoration: underline;">
       查看活动规则
     </div>

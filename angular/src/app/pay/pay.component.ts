@@ -17,6 +17,7 @@ import { OrderDto } from '@proxy/easy-abp/eshop/orders/orders/dtos';
 import { FlashSaleResultGetListInput } from '@proxy/easy-abp/eshop/plugins/flash-sales/flash-sale-results/dtos';
 import { EasyAbpEShopPayments } from '@proxy/easy-abp/eshop/payments/payments';
 import { CreatePaymentDto } from '@proxy/easy-abp/eshop/payments/payments/dtos';
+import { ConfirmationService } from '@abp/ng.theme.shared';
 
 @Component({
   selector: 'app-pay'
@@ -27,7 +28,9 @@ import { CreatePaymentDto } from '@proxy/easy-abp/eshop/payments/payments/dtos';
 export class PayComponent implements OnInit {
   validateForm: FormGroup;
   loading = false;
+  preOrderTimeout: any;
   videMode = 2;
+  lastVideMode = 0;
   currentUser$: Observable<CurrentUserDto> = this.configState.getOne$('currentUser');
   hour: string | number = '00';
   minite: string  | number = '00';
@@ -45,7 +48,8 @@ export class PayComponent implements OnInit {
     @Inject(NAVIGATE_TO_MANAGE_PROFILE) public navigateToManageProfile, private easyShopPaymentService: EasyAbpEShopPayments,
     private configState: ConfigStateService, private _snackBar: MatSnackBar,private _payService: EasyAbpPaymentService,
     private fb: FormBuilder,private _router: Router, private flashSaleResultService: FlashSaleResultService,
-    private authservice: AuthService, private flashSalePlanService : FlashSalePlanService, private orderService: OrderService) { }
+    private authservice: AuthService, private flashSalePlanService : FlashSalePlanService, private orderService: OrderService,
+    private confirmation: ConfirmationService) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -62,7 +66,7 @@ export class PayComponent implements OnInit {
   }
   submitForm(): void {
     if (this.videMode == 1) {
-      this.selectMode(2);
+      this.showOrHideRules();
       return;
     } else {
       if (this.state){
@@ -81,11 +85,18 @@ export class PayComponent implements OnInit {
     this.authservice.logout();
     this.jumpRouter('/login');
   }
-  selectMode(mode: number){
-    this.videMode = mode;
+  showOrHideRules() {
+    if (this.lastVideMode == 0) {
+      if (this.videMode == 1) return
+      this.lastVideMode = this.videMode
+      this.videMode = 1
+    } else {
+      this.videMode = this.lastVideMode
+      this.lastVideMode = 0
+    }
   }
   refTime() : boolean {
-    var nowTime = +new Date();
+    var nowTime = +(new Date()).setTime(new Date().getTime() - 2000);
     var inputTime = +new Date(this.beginTime);
     // 得到秒数
     var remain = (inputTime - nowTime) / 1000;
@@ -105,11 +116,14 @@ export class PayComponent implements OnInit {
     this.sec = s < 10 ? '0' + s : s;
     return h > 0 || m > 0 || s > 0;
   }
-  perOrder(){
+  preOrder(){
+    if (this.preOrderTimeout) {
+      clearTimeout(this.preOrderTimeout)
+      this.preOrderTimeout = null
+    }
     this.flashSalePlanService.preOrder(this.planId).subscribe(res=>{
-      this.orderId = res.id;
-      setTimeout(() => {
-        this.perOrder();
+      this.preOrderTimeout = setTimeout(() => {
+        this.preOrder();
       }, (res.expiresInSeconds - 15) * 1000);
     }, err => {
       this._snackBar.open('获取活动商品信息失败','关闭',{
@@ -129,14 +143,14 @@ export class PayComponent implements OnInit {
     this.flashSalePlanService.getList(parm).subscribe(res=>{
       this.beginTime = res.items[0].beginTime;
       this.planId = res.items[0].id;
-      this.perOrder();
+      if (!this.refTime()) this.getSaleOrder();
       this.timer = setInterval(() => {
         if (!this.refTime()){
           this.state = true;
-          this.getSaleOrder();
           clearInterval(this.timer);
         }
       }, 1000);
+      this.preOrder();
     }, err =>{
       this._snackBar.open('获取活动信息失败','关闭',{
         duration: 2000
@@ -151,25 +165,23 @@ export class PayComponent implements OnInit {
     }
     this.loading = true;
     this.flashSalePlanService.order(this.planId, parm).subscribe(res=>{
-      this.orderId = res.flashSaleResultId;
-      if (this.orderId){
-        setTimeout(() => {
-          this.getOrderStatus();
-        }, 2000);
+      if (res.flashSaleResultId){
+        this.getOrderStatus(res.flashSaleResultId);
+      } else {
+        this.loading = false;
+        this.confirmation.error('抢购失败，谢谢参与', "抢购失败")
+        this.preOrder()
       }
     }, err => {
       this.loading = false;
       this._snackBar.open('下单失败，请重试','关闭',{
         duration: 2000
       });
+      this.preOrder()
     })
   }
-  getOrderStatus(){
-    if(!this.orderId){
-      this.loading = false;
-      return;
-    }
-    this.flashSaleResultService.get(this.orderId).subscribe(res=>{
+  getOrderStatus(flashSaleResultId: string){
+    this.flashSaleResultService.get(flashSaleResultId).subscribe(res=>{
       if (res.status == 1){
         this._snackBar.open('恭喜您,抢购资格成功!','关闭',{
           duration: 2000
@@ -180,7 +192,7 @@ export class PayComponent implements OnInit {
         this.createPayOrder();
       } else {
         setTimeout(() => {
-          this.getOrderStatus();
+          this.getOrderStatus(flashSaleResultId);
         }, 2000);
       }
     }, err => {
@@ -246,12 +258,12 @@ export class PayComponent implements OnInit {
       this.orderData = res;
       // 无此订单
       if (!res) {
-        this.videMode = 1;
+        this.videMode = 2;
         return;
       }
       // 有订单但已取消
       if (!res || res.orderStatus == 8){
-        this.videMode = 1;
+        this.videMode = 2;
         return;
       } 
       this.videMode = 4;
