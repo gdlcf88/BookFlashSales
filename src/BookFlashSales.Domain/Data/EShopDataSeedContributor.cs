@@ -99,7 +99,7 @@ public class EShopDataSeedContributor : IDataSeedContributor, ITransientDependen
             return;
         }
 
-        var product = new Product(_guidGenerator.Create(), _currentTenant.Id, store.Id,
+        var product = new Product(Guid.Parse("3a0580c5-cdaa-db74-3733-4d4d72354773"), _currentTenant.Id, store.Id,
             ProductsConsts.DefaultProductGroupName, null, "BookFlashSale", "ABP群友送书秒杀活动", InventoryStrategy.FlashSales,
             null, true, false, false, TimeSpan.FromMinutes(5), null, 0);
 
@@ -114,7 +114,8 @@ public class EShopDataSeedContributor : IDataSeedContributor, ITransientDependen
         var optionIds = await _attributeOptionIdsSerializer.SerializeAsync(
             productAttribute.ProductAttributeOptions.Select(x => x.Id));
 
-        var sku = new ProductSku(_guidGenerator.Create(), optionIds, "normal", "CNY", null, 0, 1, 1, null, null, null);
+        var sku = new ProductSku(Guid.Parse("3a0580c5-d0a2-f7cc-ee6c-313d59b4b61b"), optionIds, "normal", "CNY", null,
+            0, 1, 1, null, null, null);
 
         await _productManager.CreateSkuAsync(product, sku);
     }
