@@ -2,7 +2,7 @@
   <PropertyGroup>
 
     <AbpVersion>5.3.1</AbpVersion>
-    <EShopVersion>3.0.0-preview.12</EShopVersion>
+    <EShopVersion>3.0.0-preview.13</EShopVersion>
     <PaymentServiceVersion>2.0.15</PaymentServiceVersion>
 
   </PropertyGroup>
