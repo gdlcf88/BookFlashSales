@@ -24,6 +24,7 @@ using EasyAbp.PaymentService.Payments;
 using EasyAbp.PaymentService.Web;
 using Medallion.Threading;
 using Medallion.Threading.Redis;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +35,7 @@ using Volo.Abp;
 using Volo.Abp.Account.Web;
 using Volo.Abp.AspNetCore.Auditing;
 using Volo.Abp.AspNetCore.Authentication.JwtBearer;
+using Volo.Abp.AspNetCore.ExceptionHandling;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.Localization;
 using Volo.Abp.AspNetCore.Mvc.UI.Bundling;
@@ -220,6 +222,11 @@ public class BookFlashSalesWebModule : AbpModule
 
     private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
     {
+        Configure<AbpAuthorizationExceptionHandlerOptions>(options =>
+        {
+            options.AuthenticationScheme = JwtBearerDefaults.AuthenticationScheme;
+        });
+
         context.Services.AddAuthentication()
             .AddJwtBearer(options =>
             {
@@ -229,6 +236,22 @@ public class BookFlashSalesWebModule : AbpModule
             });
 
         context.Services.ForwardIdentityAuthenticationForBearer();
+
+        // context.Services.ConfigureApplicationCookie(options =>
+        // {
+        //     options.ForwardDefaultSelector = ctx =>
+        //     {
+        //         var authorization = ctx.Request.Headers.Authorization.FirstOrDefault();
+        //
+        //         if (authorization is not null &&
+        //             authorization.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
+        //         {
+        //             return JwtBearerDefaults.AuthenticationScheme;
+        //         }
+        //
+        //         return null;
+        //     };
+        // });
     }
 
     private void ConfigureAutoMapper()
