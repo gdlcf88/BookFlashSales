@@ -68,7 +68,9 @@ export class PayComponent implements OnInit {
       if (this.state){
         this.submitOrder();
       } else {
-        this._snackBar.open('活动尚未开始!');
+        this._snackBar.open('活动尚未开始!','关闭',{
+          duration: 2000
+        });
       }
     }
   }
@@ -110,7 +112,9 @@ export class PayComponent implements OnInit {
         this.perOrder();
       }, (res.expiresInSeconds - 15) * 1000);
     }, err => {
-      this._snackBar.open('获取活动商品信息失败');
+      this._snackBar.open('获取活动商品信息失败','关闭',{
+        duration: 2000
+      });
     })
   }
   initClock(){
@@ -134,7 +138,9 @@ export class PayComponent implements OnInit {
         }
       }, 1000);
     }, err =>{
-      this._snackBar.open('获取活动信息失败');
+      this._snackBar.open('获取活动信息失败','关闭',{
+        duration: 2000
+      });
     });
   }
   submitOrder(){
@@ -153,7 +159,9 @@ export class PayComponent implements OnInit {
       }
     }, err => {
       this.loading = false;
-      this._snackBar.open('下单失败，请重试');
+      this._snackBar.open('下单失败，请重试','关闭',{
+        duration: 2000
+      });
     })
   }
   getOrderStatus(){
@@ -163,7 +171,9 @@ export class PayComponent implements OnInit {
     }
     this.flashSaleResultService.get(this.orderId).subscribe(res=>{
       if (res.status == 1){
-        this._snackBar.open('恭喜您,抢购资格成功!');
+        this._snackBar.open('恭喜您,抢购资格成功!','关闭',{
+          duration: 2000
+        });
         this.loading = false;
         this.videMode = 3;
         this.orderId = res.orderId;
@@ -175,7 +185,9 @@ export class PayComponent implements OnInit {
       }
     }, err => {
       this.loading = false;
-      this._snackBar.open('获取下单结果发生错误');
+      this._snackBar.open('获取下单结果发生错误','关闭',{
+        duration: 2000
+      });
     })
   }
   getSaleOrder(){
@@ -217,11 +229,15 @@ export class PayComponent implements OnInit {
     };
     this._payService.pay(this.orderData.paymentId, parm).subscribe(res=>{
       this.loading = false;
-      this._snackBar.open('恭喜您,支付成功!');
+      this._snackBar.open('恭喜您,支付成功!','关闭',{
+        duration: 2000
+      });
       this.gerOrder();
     }, err => {
       this.loading = false;
-      this._snackBar.open('支付失败!');
+      this._snackBar.open('支付失败!','关闭',{
+        duration: 2000
+      });
     });
   }
   gerOrder(){
@@ -240,7 +256,9 @@ export class PayComponent implements OnInit {
       } 
       this.videMode = 4;
     }, err => {
-      this._snackBar.open('查询订单信息失败');
+      this._snackBar.open('查询订单信息失败','关闭',{
+        duration: 2000
+      });
     })
   }
 }
