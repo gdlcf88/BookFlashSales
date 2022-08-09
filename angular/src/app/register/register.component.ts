@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
       userName: [null],
       wishes: [null],
       name: [null, [Validators.required]],
-      password: [null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&].{6,}$')]],
+      password: [null, [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&].{6,}$')]],
       address: [null, [Validators.required]]
     });
   }
