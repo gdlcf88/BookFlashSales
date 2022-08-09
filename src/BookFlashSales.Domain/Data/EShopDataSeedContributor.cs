@@ -134,9 +134,9 @@ public class EShopDataSeedContributor : IDataSeedContributor, ITransientDependen
         var beginTime = new DateTime(2022, 8, 9, 19, 30, 0);
         var endTime = new DateTime(2022, 8, 9, 19, 40, 0);
 
-        var plan = await _flashSalePlanRepository.InsertAsync(new FlashSalePlan(_guidGenerator.Create(),
-            _currentTenant.Id, store.Id, beginTime, endTime, product.Id,
-            product.ProductSkus.First(x => x.Name == "normal").Id, true));
+        var plan = await _flashSalePlanRepository.InsertAsync(new FlashSalePlan(
+            new Guid("3a05957c-a91e-afbd-1e37-84cb004aa09b"), _currentTenant.Id, store.Id, beginTime, endTime,
+            product.Id, product.ProductSkus.First(x => x.Name == "normal").Id, true));
 
         await _flashSalePlanRepository.InsertAsync(plan, true);
     }
