@@ -116,7 +116,7 @@ public class BookFlashSalesWebModule : AbpModule
         ConfigureCache(configuration);
         ConfigureDataProtection(context, configuration, hostingEnvironment);
 
-        // EnableStressTest(context.Services);
+        EnableStressTest(context.Services);
         
         context.Services.ConfigureNonBreakingSameSiteCookies();
 
