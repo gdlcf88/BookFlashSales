@@ -101,7 +101,7 @@ public class EShopDataSeedContributor : IDataSeedContributor, ITransientDependen
 
         var product = new Product(Guid.Parse("3a0580c5-cdaa-db74-3733-4d4d72354773"), _currentTenant.Id, store.Id,
             ProductsConsts.DefaultProductGroupName, null, "BookFlashSale", "ABP群友送书秒杀活动", InventoryStrategy.FlashSales,
-            null, true, false, false, TimeSpan.FromMinutes(5), null, 0);
+            null, true, false, false, TimeSpan.FromMinutes(1), null, 0);
 
         var productAttribute = new ProductAttribute(_guidGenerator.Create(), "类型", null);
         var productAttributeOption = new ProductAttributeOption(_guidGenerator.Create(), "标准", null);
@@ -132,7 +132,7 @@ public class EShopDataSeedContributor : IDataSeedContributor, ITransientDependen
         }
 
         var beginTime = new DateTime(2022, 8, 9, 19, 30, 0);
-        var endTime = new DateTime(2022, 8, 9, 19, 40, 0);
+        var endTime = new DateTime(2023, 8, 9, 19, 30, 0);
 
         var plan = await _flashSalePlanRepository.InsertAsync(new FlashSalePlan(
             new Guid("3a05957c-a91e-afbd-1e37-84cb004aa09b"), _currentTenant.Id, store.Id, beginTime, endTime,

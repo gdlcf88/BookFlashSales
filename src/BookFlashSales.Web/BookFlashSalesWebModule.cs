@@ -58,6 +58,7 @@ using Volo.Abp.TenantManagement.Web;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
+using Volo.Abp.EventBus.RabbitMq;
 
 namespace BookFlashSales.Web;
 
@@ -76,6 +77,7 @@ namespace BookFlashSales.Web;
     typeof(AbpSwashbuckleModule),
     typeof(AbpCachingStackExchangeRedisModule),
     typeof(AbpDistributedLockingModule),
+    typeof(AbpEventBusRabbitMqModule),
     typeof(EShopWebModule),
     typeof(EShopPluginsFlashSalesWebModule),
     typeof(EShopPluginsInventoriesDaprActorsAspNetCoreModule),
@@ -141,6 +143,7 @@ public class BookFlashSalesWebModule : AbpModule
         Configure<AbpAspNetCoreAuditingOptions>(options =>
         {
             options.IgnoredUrls.AddIfNotContains("/api/e-shop/plugins/flash-sales/flash-sale-plan");
+            options.IgnoredUrls.AddIfNotContains("/api/app/hello/set-cache");
             options.IgnoredUrls.AddIfNotContains("/ping");
             options.IgnoredUrls.AddIfNotContains("/healthz");
             options.IgnoredUrls.AddIfNotContains("/actors");
